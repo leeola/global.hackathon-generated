@@ -1,3 +1,30 @@
 {
-  "teamName": "Crying Objects"
+  "teamName": "Crying Objects",
+  "members": [
+    {
+      "name": "Emre",
+      "twitter": "emre",
+      "koding": "emre",
+      "location": "Istanbul, TR"
+    },
+    {
+      "name": "Sinan",
+      "twitter": "sinan",
+      "koding": "sinan",
+      "location": "Unknown",
+      "lead": true
+    },
+    {
+      "name": "Devrim",
+      "twitter": "devrim",
+      "koding": "devrim",
+      "location": "SF, US"
+    },
+    {
+      "name": "Stefan",
+      "twitter": "stefanbc",
+      "koding": "stefanbc",
+      "location": "Romania"
+    }
+  ]
 }

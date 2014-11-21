@@ -6,6 +6,7 @@ gulp    = require 'gulp'
 concat  = require 'gulp-concat'
 replace = require 'gulp-replace'
 tap = require 'gulp-tap'
+util = require 'gulp-util'
 
 
 
@@ -22,7 +23,7 @@ tap_json = (file, t) ->
     file.contents = new Buffer ''
     return
 
-  str = format_json data
+  str = format_json data, file.path
   if not str?
     util.log util.colors.red('Warning'), "The JSON data couldn't be formatted
       into the table for an unknown reason. File: #{file.path}"
@@ -36,13 +37,33 @@ tap_json = (file, t) ->
 
 # Format a data object, and return a string to be
 # appended to the readme
-format_json = (data) ->
+format_json = (data, filepath) ->
+  teamPath = path.basename path.dirname filepath
   output = '|'
 
+  # First column, #TeamName
   if data.teamName?
-    output += " #{data.teamName} |"
+    output += " ##{data.teamName} |"
   else
-    output =+ " |"
+    output += " |"
+
+  # Second column, TeamLead
+  # Faking for now.
+  output += " |"
+
+  # Third column, TeamMembers
+  # Faking for now
+  output += " |"
+
+  # Fourth column, TeamPage
+  if data.teamName? then teamName = data.teamName
+  else teamName = teamPath
+  output += " [#{teamName}](./Teams/#{teamPath}/ABOUT.md) |"
+
+  # Fifth column, Approved
+  # Faking for now
+  output += " |"
+
 
 
 
@@ -53,7 +74,7 @@ gulp.task 'run', ->
     './Teams/**/*.json'
   ]
     .pipe tap tap_json
-    .pipe concat 'README.md'
+    .pipe concat 'README.md', newLine: ''
     .pipe gulp.dest './'
 
 
