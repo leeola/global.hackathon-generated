@@ -34,36 +34,62 @@ tap_json = (file, t) ->
   file.contents = new Buffer str
 
 
+# Format a member object into a link
+format_member = (member) ->
+  "[#{member?.name}](https://koding.com/#{member?.koding})"
+
+
 
 # Format a data object, and return a string to be
 # appended to the readme
 format_json = (data, filepath) ->
-  teamPath = path.basename path.dirname filepath
-  output = '|'
+  teamPathName = path.basename path.dirname filepath
 
+  # Get the lead, ahead of time.
+  teamLead = null
+  if data.members? and data.members instanceof Array
+    for member in data.members
+      if member.lead is true
+        teamLead = member
+        break
+
+  output = '|'
   # First column, #TeamName
   if data.teamName?
-    output += " ##{data.teamName} |"
+    output += " <a target='_blank'
+      href='https://twitter.com/home?status=Go Team %23CryingObjects @koding %23hackathon koding.com/Hackathon
+      #{if teamLead?.twitter? then "@"+teamLead.twitter}'>
+      <img src='https://g.twimg.com/Twitter_logo_blue.png' height='14'/>
+      ##{data.teamName}
+      </a> |"
   else
     output += " |"
 
   # Second column, TeamLead
-  # Faking for now.
-  output += " |"
+  if teamLead?
+    #output += "[#{teamLead.name}](https://koding.com/#{teamLead.koding}) |"
+    output += "#{format_member teamLead} |"
+  else
+    output += " |"
 
   # Third column, TeamMembers
-  # Faking for now
+  if data.members? and data.members instanceof Array
+    for member in data.members
+      output += "#{format_member member}
+        #{member.location ? ''}<br>"
   output += " |"
 
   # Fourth column, TeamPage
   if data.teamName? then teamName = data.teamName
-  else teamName = teamPath
-  output += " [#{teamName}](./Teams/#{teamPath}/ABOUT.md) |"
+  else teamName = teamPathName
+  output += " [#{teamName}](./Teams/#{teamPathName}/ABOUT.md) |"
 
   # Fifth column, Approved
   # Faking for now
   output += " |"
 
+  # Return the final output
+  output
 
 
 
@@ -76,7 +102,5 @@ gulp.task 'run', ->
     .pipe tap tap_json
     .pipe concat 'README.md', newLine: ''
     .pipe gulp.dest './'
-
-
 
 gulp.task 'default', ['run']
