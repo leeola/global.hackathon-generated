@@ -1,4 +1,4 @@
 
 | #TeamNameTeam | LeadTeam | membersTeam | pageApproved? |
 |---------------|----------|-------------|---------------|
-| [#Crying Objects](example.com) | | | [Crying Objects](./Teams/CryingObjects/ABOUT.md) | |
+| [#Crying Objects](http://example.com) | | | [Crying Objects](./Teams/CryingObjects/ABOUT.md) | |
