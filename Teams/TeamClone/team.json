@@ -1,0 +1,29 @@
+{
+  "teamName": "Team Clone",
+  "members": [
+    {
+      "name": "Emre Clone",
+      "twitter": "emre",
+      "koding": "emre",
+      "location": "Istanbul, TR"
+    },
+    {
+      "name": "Sinan Clone",
+      "twitter": "sinan",
+      "koding": "sinan",
+      "lead": true
+    },
+    {
+      "name": "Devrim Clone",
+      "twitter": "devrim",
+      "koding": "devrim",
+      "location": "SF, US"
+    },
+    {
+      "name": "Stefan Clone",
+      "twitter": "stefanbc",
+      "koding": "stefanbc",
+      "location": "Romania"
+    }
+  ]
+}
